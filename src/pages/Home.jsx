@@ -1,9 +1,16 @@
-import React from 'react'
+import Navbar from "../components/Navbar";
+import Profile from "../components/Profile";
 
 function Home() {
   return (
-    <div>Home</div>
-  )
+    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* <Navbar /> */}
+      <Navbar />
+      <main>
+        <Profile />
+      </main>
+    </div>
+  );
 }
 
-export default Home
+export default Home;
