@@ -3,31 +3,33 @@ import { cn } from "@/lib/utils";
 
 function Skills() {
   const skills = [
-    { name: "SpringBoot", level: 80, category: "backend" },
-    { name: "Node.js", level: 80, category: "backend" },
-    { name: "Express", level: 75, category: "backend" },
-    { name: "MongoDB", level: 70, category: "backend" },
-    { name: "PostgreSQL", level: 90, category: "backend" },
-    { name: "REST APIs", level: 85, category: "backend" },
-    { name: "Angular", level: 90, category: "frontend" },
-    { name: "React", level: 85, category: "frontend" },
-    { name: "Tailwind CSS", level: 70, category: "frontend" },
-    { name: "Docker", level: 70, category: "tools" },
-    { name: "Kubernetes", level: 60, category: "tools" },
-    { name: "Terraform", level: 95, category: "tools" },
-    { name: "Packer", level: 95, category: "tools" },
-    { name: "AWS/GCP", level: 90, category: "tools" },
-    { name: "Cloud Infrastructure", level: 90, category: "tools" },
-    { name: "CI/CD (GitHub Actions, Jenkins)", level: 75, category: "tools" },
-    { name: "Git/GitHub", level: 90, category: "tools" },
-    { name: "Calypso", level: 90, category: "tools" },
+    { name: "SpringBoot", category: "backend" },
+    { name: "Node.js", category: "backend" },
+    { name: "Express", category: "backend" },
+    { name: "MongoDB", category: "backend" },
+    { name: "PostgreSQL", category: "backend" },
+    { name: "REST APIs", category: "backend" },
+    { name: "Angular", category: "frontend" },
+    { name: "React", category: "frontend" },
+    { name: "Tailwind CSS", category: "frontend" },
+    { name: "Docker", category: "tools" },
+    { name: "Kubernetes", category: "tools" },
+    { name: "Terraform", category: "tools" },
+    { name: "Packer", category: "tools" },
+    { name: "AWS/GCP", category: "tools" },
+    { name: "Cloud Infrastructure", category: "tools" },
+    { name: "CI/CD (GitHub Actions, Jenkins)", category: "tools" },
+    { name: "Git/GitHub", category: "tools" },
+    { name: "Calypso", category: "tools" },
   ];
 
   const [activeCategory, setActiveCategory] = useState("All");
 
   const categories = ["All", "Backend", "Frontend", "Tools"];
   const filteredSkills = skills.filter(
-    (skill) => activeCategory === "All" || skill.category === activeCategory.toLowerCase()
+    (skill) =>
+      activeCategory === "All" ||
+      skill.category === activeCategory.toLowerCase()
   );
 
   return (
@@ -61,13 +63,7 @@ function Skills() {
             >
               <div className="text-left mb-4">
                 <h3 className="font-semibold text-lg">{skill.name}</h3>
-              </div>
-              <div className="w-full bg-secondary/50 h-2 rounded-full overflow-hidden">
-                <div
-                  className="bg-primary h-2 rounded-full orogin-left animate-[grow_1.5s_ease-out"
-                  style={{ width: skill.level + "%" }}
-                ></div>
-              </div>
+              </div>            
             </div>
           ))}
         </div>
