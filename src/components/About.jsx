@@ -1,4 +1,4 @@
-import { Briefcase, Code, User } from "lucide-react";
+import { Briefcase, Code, Gamepad, User } from "lucide-react";
 import React from "react";
 
 function About() {
@@ -22,10 +22,14 @@ function About() {
             keen interest in exploring new technologies.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4 justify-center">
-            <a href="#contact" className="cosmic-button">
+            <a href="#contact" className="custom-button">
               Get In touch
             </a>
-            <a href="#contact" className="cosmic-button">
+            <a
+              href="/Guhan_Santhanam_Resume_2025.pdf"
+              target="_blank"
+              className="custom-button"
+            >
               Download CV
             </a>
           </div>
@@ -37,25 +41,29 @@ function About() {
                 <Code />
               </div>
               <div className="text-left">
-                <h4 className="font-semibold text-lg">
+                <h4 className="font-semibold text-lg"> Full Stack Developer</h4>
+                <p className="text-mute-foreground">
                   {" "}
-                  Full Stack Development
-                </h4>
-                <p className="text-mute-foreground"> i make application goof</p>
+                  Crafting seamless user experiences with robust backend
+                  architecture using Java, React, Spring Boot, and RESTful APIs.
+                </p>
               </div>
             </div>
           </div>
           <div className="gradient-border p-6 card-hover">
             <div className="flex items-start gap-4">
               <div className="p-3 rounded-full bg-primary">
-                <User />
+                <Gamepad />
               </div>
               <div className="text-left">
-                <h4 className="font-semibold text-lg">
+                <h4 className="font-semibold text-lg"> When I’m not coding</h4>
+                <p className="text-mute-foreground">
                   {" "}
-                  Full Stack Development
-                </h4>
-                <p className="text-mute-foreground"> i make application goof</p>
+                  I’m probably off saving virtual worlds, grinding XP, or
+                  rage-quitting a competitive match. I live for building cool
+                  stuff and learning new tech — bonus points if I can automate
+                  it!
+                </p>
               </div>
             </div>
           </div>
@@ -67,9 +75,14 @@ function About() {
               <div className="text-left">
                 <h4 className="font-semibold text-lg">
                   {" "}
-                  Full Stack Development
+                  Professional Shenanigans
                 </h4>
-                <p className="text-mute-foreground"> i make application goof</p>
+                <p className="text-mute-foreground">
+                  {" "}
+                  Over 2 years of experience at BNP Paribas, where I developed
+                  enterprise tools, improved system workflows, and earned the
+                  “Rising Star” Award for high-impact contributions.
+                </p>
               </div>
             </div>
           </div>

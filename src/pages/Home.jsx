@@ -1,4 +1,6 @@
 import About from "../components/About";
+import Contact from "../components/Contact";
+import Experience from "../components/Experience";
 import Navbar from "../components/Navbar";
 import Profile from "../components/Profile";
 import Skills from "../components/Skills";
@@ -12,6 +14,8 @@ function Home() {
         <Profile />
         <About />
         <Skills />
+        <Experience/> 
+        <Contact />
       </main>
     </div>
   );

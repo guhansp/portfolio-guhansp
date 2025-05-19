@@ -25,7 +25,7 @@ function Profile() {
             solutions.
           </p>
           <div className="pt-4 opacity-0 animate-fade-in-delay-4">
-            <a href="#projects" className="cosmic-button">
+            <a  href="https://github.com/guhansp" target="_blank" className="custom-button">
               View My Work
             </a>
           </div>
