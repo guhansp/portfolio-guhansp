@@ -1,5 +1,7 @@
+import About from "../components/About";
 import Navbar from "../components/Navbar";
 import Profile from "../components/Profile";
+import Skills from "../components/Skills";
 
 function Home() {
   return (
@@ -8,6 +10,8 @@ function Home() {
       <Navbar />
       <main>
         <Profile />
+        <About />
+        <Skills />
       </main>
     </div>
   );
