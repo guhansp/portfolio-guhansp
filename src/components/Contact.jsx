@@ -9,22 +9,81 @@ import {
 import { cn } from "@/lib/utils";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 
 function Contact() {
   const [error, setError] = useState(null);
-  const [isSubmit, setisSubmit] = useState(false);
+  const [isSubmit, setIsSubmit] = useState(false);
+  const [isRecaptchaReady, setIsRecaptchaReady] = useState(false);
+  const formRef = useRef();
+  const widgetIdRef = useRef(null);
+
+  useEffect(() => {
+    window.onRecaptchaLoadCallback = () => {
+      if (window.grecaptcha && document.getElementById("recaptcha-container")) {
+        widgetIdRef.current = window.grecaptcha.render("recaptcha-container", {
+          sitekey: "6LcFi0ArAAAAAERa8SqRuCi_9I871jV4JluTUdWX",
+          callback: (response) => {
+            console.log("reCAPTCHA token:", response);
+          },
+        });
+        setIsRecaptchaReady(true);
+      }
+    };
+
+    if (!document.getElementById("recaptcha-script")) {
+      const script = document.createElement("script");
+      script.id = "recaptcha-script";
+      script.src =
+        "https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render=explicit";
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+
+      return () => {
+        delete window.onRecaptchaLoadCallback;
+        if (window.grecaptcha && widgetIdRef.current !== null) {
+          window.grecaptcha.reset(widgetIdRef.current);
+        }
+        if (script.parentNode) {
+          script.parentNode.removeChild(script);
+        }
+      };
+    } else {
+      if (window.grecaptcha && document.getElementById("recaptcha-container")) {
+        widgetIdRef.current = window.grecaptcha.render("recaptcha-container", {
+          sitekey: import.meta.env.VITE_EMAILJS_CAPTCHA,
+          callback: (response) => {
+            console.log("reCAPTCHA token:", response);
+          },
+        });
+        setIsRecaptchaReady(true);
+      }
+    }
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    let recaptchaResponse = null;
+    if (window.grecaptcha && widgetIdRef.current !== null) {
+      recaptchaResponse = window.grecaptcha.getResponse(widgetIdRef.current);
+    }
+
+    if (!recaptchaResponse) {
+      toast.dismiss();
+      toast.error("Please complete the reCAPTCHA.");
+      return;
+    }
+
     toast.info("Sending your message...");
 
     emailjs
       .sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-        "#contact-form",
+        formRef.current,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(
@@ -33,13 +92,18 @@ function Contact() {
           setError(null);
           toast.dismiss();
           toast.success("Message Sent successfully!");
-          setisSubmit(true);
+          setIsSubmit(true);
+          formRef.current.reset();
         },
         (error) => {
           console.log(error);
           setError("Failed to send email. Please try again.");
+          toast.dismiss();
           toast.error("Failed to send email. Please try again.");
-          setisSubmit(false);
+          setIsSubmit(false);
+          if (window.grecaptcha && widgetIdRef.current !== null) {
+            window.grecaptcha.reset(widgetIdRef.current);
+          }
         }
       );
   };
@@ -47,9 +111,7 @@ function Contact() {
   return (
     <section id="contact" className="py-24 px-4 relative bg-secondary/30">
       <div className="container mx-auto max-w-5xl">
-        {" "}
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          {" "}
           Get In <span className="text-primary"> Touch</span>
         </h2>
         <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
@@ -59,23 +121,18 @@ function Contact() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div className="space-y-8">
-            <h3 className="text-2xl font-semibold mb-6">
-              {" "}
-              Contact Information{" "}
-            </h3>
+            <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
             <div className="space-y-6 justify-center">
               <div className="flex items-start space-x-4">
                 <div className="p-3 rounded-full bg-primary/10">
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
-                <div>
-                  <h4 className="font-medium"> Email</h4>
+                <div className="mt-2">
                   <a
                     href="mailto:santhanamparthiban.g@northeastern.edu"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {" "}
-                    santhanamparthiban.g@northeastern.edu
+                    Send me an email
                   </a>
                 </div>
               </div>
@@ -83,15 +140,13 @@ function Contact() {
                 <div className="p-3 rounded-full bg-primary/10">
                   <LinkedinIcon className="h-6 w-6 text-primary" />
                 </div>
-                <div className="md:ml-16">
-                  <h4 className="font-medium"> LinkedIn</h4>
+                <div className="mt-2">
                   <a
                     href="https://www.linkedin.com/in/guhan-sp/"
                     target="_blank"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {" "}
-                    Guhan Santhanam S P
+                    Connect with me on LinkedIn
                   </a>
                 </div>
               </div>
@@ -99,15 +154,14 @@ function Contact() {
                 <div className="p-3  rounded-full bg-primary/10">
                   <GithubIcon className="h-6 w-6 text-primary" />
                 </div>
-                <div className="md:ml-10">
-                  <h4 className="font-medium">Explore more of my projects</h4>
+                <div className="mt-2">
+                  <h4 className="font-medium"></h4>
                   <a
                     href="https://github.com/guhansp"
                     target="_blank"
                     className="text-muted-foreground hover:text-primary transition-colors"
                   >
-                    {" "}
-                    Guhan Santhanam S P
+                    View my GitHub
                   </a>
                 </div>
               </div>
@@ -119,13 +173,13 @@ function Contact() {
               onSubmit={handleSubmit}
               className="space-y-6"
               id="contact-form"
+              ref={formRef}
             >
               <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium mb-2"
                 >
-                  {" "}
                   Your Name
                 </label>
                 <input
@@ -142,7 +196,6 @@ function Contact() {
                   htmlFor="emailid"
                   className="block text-sm font-medium mb-2"
                 >
-                  {" "}
                   Email
                 </label>
                 <input
@@ -159,7 +212,6 @@ function Contact() {
                   htmlFor="message"
                   className="block text-sm font-medium mb-2"
                 >
-                  {" "}
                   Message
                 </label>
                 <textarea
@@ -171,12 +223,21 @@ function Contact() {
                   required
                 />
               </div>
+
+              {!isSubmit && (
+                <div
+                  id="recaptcha-container"
+                  className="flex justify-center items-center "
+                ></div>
+              )}
+
               {!isSubmit ? (
                 <button
                   type="submit"
                   className={cn(
                     "custom-button w-full flex items-center justify-center gap-2"
                   )}
+                  disabled={!isRecaptchaReady}
                 >
                   <Send size={16} /> Send Message
                 </button>
