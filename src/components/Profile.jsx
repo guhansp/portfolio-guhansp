@@ -15,7 +15,7 @@ function Profile() {
               {" "}
               Guhan
             </span>
-            <span className="text-gradient ml-2 opacity-0 animate-fade-in-delay-2">
+            <span className="text-gradient ml-3 opacity-0 animate-fade-in-delay-2">
               Santhanam
             </span>
           </h1>
@@ -36,7 +36,7 @@ function Profile() {
         </div>
       </div>
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce">
-        <button onClick={() => window.location.hash = '#about'}>
+        <button onClick={() => (window.location.hash = "#about")}>
           <ArrowDown className="h-5 w-5 text-primary animate-bounce" />
         </button>
       </div>

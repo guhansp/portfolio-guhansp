@@ -21,16 +21,15 @@ function Navbar() {
 
   return (
     <nav
-      className={cn("fixed top-0 w-full z-40 transition-all duration-300 py-5")}
+      className={cn("fixed top-0 w-full z-40 transition-all duration-300 py-5 bg-black/90")}
     >
       <div className="container flex items-center justify-between">
         <a
           className="text-xl font-bold text-primary flex items-center"
-          href="#hero"
+          href="#profile"
         >
           <span className="relative z-10">
-            <span className="text-glow text-foreground"> Guhan S P </span>{" "}
-            Portfolio
+            <span className="text-glow text-foreground"> Guhan </span> S P
           </span>
         </a>
 
