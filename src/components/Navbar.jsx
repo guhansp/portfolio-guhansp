@@ -11,23 +11,17 @@ function Navbar() {
     { name: "Contact", href: "#contact" },
   ];
 
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
+    document.body.style.overflow = isMenuOpen ? "hidden" : "auto";
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      document.body.style.overflow = "auto";
     };
-  }, []);
+  }, [isMenuOpen]);
+
   return (
     <nav
-      className={cn(
-        "fixed w-full z-40 transition-all duration-300",
-        isScrolled ? "py-3 bg-background/80 backdrop-blur-md shadow-xs" : "py-5"
-      )}
+      className={cn("fixed top-0 w-full z-40 transition-all duration-300 py-5")}
     >
       <div className="container flex items-center justify-between">
         <a
