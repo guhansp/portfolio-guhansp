@@ -1,5 +1,8 @@
 {
   "name": "guhan-portfolio",
+  "homepage": "http://guhansp.me/",
+  "description": "Guhan's Portfolio",
+  "author": "Guhan S P",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -7,7 +10,9 @@
     "dev": "vite --host ",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
