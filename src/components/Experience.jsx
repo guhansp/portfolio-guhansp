@@ -1,4 +1,4 @@
-import { Banknote, Building2, CircleDollarSign } from "lucide-react";
+import { Banknote, Building2, CircleDollarSign, School } from "lucide-react";
 import React from "react";
 
 function Experience() {
@@ -17,7 +17,7 @@ function Experience() {
                   <td>
                     <div className="bg-card p-6 rounded-xl shadow-md mb-4 md:w-[400px] min-h-[350px]">
                       <div className="flex items-center ">
-                        <Building2 size={20} className="text-primary" />
+                        <School size={20} className="text-primary" />
                         <h2 className="ml-3 text-m font-semibold text-foreground">
                           Northeastern University
                         </h2>
@@ -102,7 +102,7 @@ function Experience() {
                 <td>
                   <div className="bg-card p-6 rounded-xl shadow-md mb-4 md:w-[400px] min-h-[350px]">
                     <div className="flex items-center">
-                      <Building2 size={20} className="text-primary" />
+                      <School size={20} className="text-primary" />
                       <h2 className="ml-3 text-m font-semibold text-foreground">
                         VIT University
                       </h2>
@@ -138,7 +138,7 @@ function Experience() {
                 <td>
                   <div className="bg-card p-6 rounded-xl shadow-md mb-4 md:w-[400px] min-h-[350px]">
                     <div className="flex items-center">
-                      <Building2 size={20} className="text-primary" />
+                      <School size={20} className="text-primary" />
                       <h2 className="ml-3 text-m font-semibold text-foreground">
                         Kalasalingam University
                       </h2>
